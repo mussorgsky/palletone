@@ -157,21 +157,19 @@ PalletedImage::PalletedImage(std::vector<Chunk> chunks)
 		int read = 0;
 		//dekompresja
 		while (decompressed.size() < width * height) {
-			if (compressed[pos] > 128) {
+			int value = compressed[pos];
+			if (value > 128) {
 				read = pos + 1;
-				for (int i = 0; i < 257 - compressed[pos]; i++) {
+				for (int i = 0; i < 257 - value; i++) {
 					decompressed.push_back(compressed[read]);
 				}
 				pos += 2;
 			}
-			else if (compressed[pos] < 128) {
-				for (int i = 0; i < compressed[pos] + 1; i++) {
-					decompressed.push_back(compressed[pos + i]);
+			else if (value < 128) {
+				for (int i = 0; i < value + 1; i++) {
+					decompressed.push_back(compressed[pos + 1 + i]);
 				}
 				pos += compressed[pos] + 2;
-			}
-			else {
-				break;
 			}
 		}
 		std::cout << decompressed.size() << " decompressed pixels have been created\n";
