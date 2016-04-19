@@ -101,12 +101,14 @@ PalletedImage::PalletedImage(std::vector<Chunk> chunks)
 			idx = 2;
 
 			//rate
+			offset = idx;
 			for (int mult = 256; idx < offset + 2; idx++) {
 				rate += ch->content[idx] * mult;
 				mult /= 256;
 			}
 
 			//flags
+			offset = idx;
 			for (int mult = 256; idx < offset + 2; idx++) {
 				flags += ch->content[idx] * mult;
 				mult /= 256;
@@ -176,5 +178,41 @@ PalletedImage::PalletedImage(std::vector<Chunk> chunks)
 		
 		//kopiuj decompressed w pixels
 		pixels = decompressed;
+	}
+}
+
+sf::Texture PalletedImage::makeTexture()
+{
+	sf::Texture texture;
+	texture.create(width, height);
+	sf::Uint8* texturePixels = new sf::Uint8[width * height * 4]; // 4 components (RGBA)
+
+	for (int i = 0; i < pixels.size(); i++) {
+		texturePixels[4 * i] = colors[pixels[i]].red;
+		texturePixels[4 * i + 1] = colors[pixels[i]].green;
+		texturePixels[4 * i + 2] = colors[pixels[i]].blue;
+		texturePixels[4 * i + 3] = 255;
+	}
+
+	texture.update(texturePixels);
+
+	delete[] texturePixels;
+	return texture;
+}
+
+void PalletedImage::cycleRanges(float dT)
+{
+	Range * r;
+	for (int i = 0; i < ranges.size(); i++) {
+		r = &ranges[i];
+		if (r->flags % 2) {
+			r->time += dT; 
+			if (r->time > 1 / (r->rate * (15.0/4096.0))) {
+				Color color = colors[ranges[i].high];
+				colors.erase(colors.begin() + r->high);
+				colors.insert(colors.begin() + r->low, color);
+				r->time = 0;
+			}
+		}
 	}
 }

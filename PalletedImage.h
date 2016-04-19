@@ -1,5 +1,6 @@
 #include <vector>
 #include "Chunk.h"
+#include <SFML\Graphics.hpp>
 
 struct Color {
 	int red, green, blue;
@@ -8,7 +9,9 @@ struct Color {
 
 struct Range {
 	int rate, flags, low, high;
+	float time = 0;
 	Range(int r, int f, int l, int h);
+
 };
 
 class PalletedImage {
@@ -18,4 +21,6 @@ public:
 	std::vector<Range> ranges;
 	std::vector<int> pixels;
 	PalletedImage(std::vector<Chunk> chunks);
+	sf::Texture makeTexture();
+	void cycleRanges(float);
 };

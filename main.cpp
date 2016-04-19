@@ -29,31 +29,28 @@ int main(int argc, char * argv[])
 		PalletedImage image = PalletedImage(chunks);
 
 		sf::RenderWindow window(sf::VideoMode(image.width, image.height), "Palletone");
-		window.setFramerateLimit(15);
-		
-		sf::Texture texture;
-		texture.create(image.width, image.height);
-		sf::Uint8* pixels = new sf::Uint8[image.width * image.height * 4]; // 4 components (RGBA)
-		
-		for (int i = 0; i < image.pixels.size(); i++) {
-			pixels[4 * i] = image.colors[image.pixels[i]].red;
-			pixels[4 * i + 1] = image.colors[image.pixels[i]].green;
-			pixels[4 * i + 2] = image.colors[image.pixels[i]].blue;
-			pixels[4 * i + 3] = 255;
-		}
-
-		texture.update(pixels);
+		window.setFramerateLimit(60);
 
 		sf::Sprite sprite;
+		sf::Texture texture = image.makeTexture();
 		sprite.setTexture(texture);
+
+		sf::Clock deltaClock;
+		sf::Time deltaTime;
+
 		while (window.isOpen())
 		{
+			deltaTime = deltaClock.restart();
 			sf::Event event;
 			while (window.pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
 					window.close();
 			}
+
+			image.cycleRanges(deltaTime.asSeconds());
+			texture = image.makeTexture();
+			sprite.setTexture(texture);
 
 			window.clear();
 			window.draw(sprite);
