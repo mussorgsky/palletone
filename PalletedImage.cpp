@@ -205,13 +205,27 @@ void PalletedImage::cycleRanges(float dT)
 	Range * r;
 	for (int i = 0; i < ranges.size(); i++) {
 		r = &ranges[i];
-		if (r->flags % 2) {
-			r->time += dT; 
-			if (r->time > 1 / (r->rate * (15.0/4096.0))) {
-				Color color = colors[ranges[i].high];
-				colors.erase(colors.begin() + r->high);
-				colors.insert(colors.begin() + r->low, color);
-				r->time = 0;
+		//sprawdz czy cyklowac
+		if (r->flags % 2 == 1) {
+			//sprawdz czy cyklowac do tylu
+			if (r->flags >> 1 == 1) {
+				r->time += dT;
+				if (r->time > 1 / (r->rate * (15.0 / 4096.0))) {
+					Color color = colors[ranges[i].low];
+					colors.erase(colors.begin() + r->low);
+					colors.insert(colors.begin() + r->high, color);
+					r->time = 0;
+				}
+				
+			}
+			else {
+				r->time += dT;
+				if (r->time > 1 / (r->rate * (15.0 / 4096.0))) {
+					Color color = colors[ranges[i].high];
+					colors.erase(colors.begin() + r->high);
+					colors.insert(colors.begin() + r->low, color);
+					r->time = 0;
+				}
 			}
 		}
 	}
