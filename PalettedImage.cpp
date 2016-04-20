@@ -1,4 +1,4 @@
-#include "PalletedImage.h"
+#include "PalettedImage.h"
 
 Color::Color(int r, int g, int b)
 {
