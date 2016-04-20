@@ -14,13 +14,13 @@ struct Range {
 
 };
 
-class PalletedImage {
+class PalettedImage {
 public:
 	int width, height;
 	std::vector<Color> colors;
 	std::vector<Range> ranges;
 	std::vector<int> pixels;
-	PalletedImage(std::vector<Chunk> chunks);
+	PalettedImage(std::vector<Chunk> chunks);
 	sf::Texture makeTexture();
 	void cycleRanges(float);
 };

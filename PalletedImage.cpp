@@ -15,7 +15,7 @@ Range::Range(int r, int f, int l, int h)
 	high = h;
 }
 
-PalletedImage::PalletedImage(std::vector<Chunk> chunks)
+PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 {
 	int numPlanes, compression;
 	width = 0;
@@ -181,7 +181,7 @@ PalletedImage::PalletedImage(std::vector<Chunk> chunks)
 	}
 }
 
-sf::Texture PalletedImage::makeTexture()
+sf::Texture PalettedImage::makeTexture()
 {
 	sf::Texture texture;
 	texture.create(width, height);
@@ -200,7 +200,7 @@ sf::Texture PalletedImage::makeTexture()
 	return texture;
 }
 
-void PalletedImage::cycleRanges(float dT)
+void PalettedImage::cycleRanges(float dT)
 {
 	Range * r;
 	for (int i = 0; i < ranges.size(); i++) {
