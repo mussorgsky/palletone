@@ -155,21 +155,21 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 			compressed.push_back(ch->content[idx]);
 		}
 
+		int next;
 		int pos = 0;
-		int read = 0;
 		//dekompresja
 		while (decompressed.size() < width * height) {
 			int value = compressed[pos];
+			next = pos + 1;
 			if (value > 128) {
-				read = pos + 1;
 				for (int i = 0; i < 257 - value; i++) {
-					decompressed.push_back(compressed[read]);
+					decompressed.push_back(compressed[next]);
 				}
 				pos += 2;
 			}
 			else if (value < 128) {
 				for (int i = 0; i < value + 1; i++) {
-					decompressed.push_back(compressed[pos + 1 + i]);
+					decompressed.push_back(compressed[next + i]);
 				}
 				pos += compressed[pos] + 2;
 			}
