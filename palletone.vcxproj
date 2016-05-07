@@ -128,11 +128,11 @@
   <ItemGroup>
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PalletedImage.cpp" />
+    <ClCompile Include="PalettedImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chunk.h" />
-    <ClInclude Include="PalletedImage.h" />
+    <ClInclude Include="PalettedImage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

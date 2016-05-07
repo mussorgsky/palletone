@@ -21,7 +21,7 @@
     <ClCompile Include="Chunk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PalletedImage.cpp">
+    <ClCompile Include="PalettedImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Chunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PalletedImage.h">
+    <ClInclude Include="PalettedImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
