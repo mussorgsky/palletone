@@ -37,11 +37,15 @@ int main(int argc, char * argv[])
 
 		sf::Clock deltaClock;
 		sf::Time deltaTime;
+		sf::Event event;
+
+		int frames = 0;
+		float time = 0;
+		const int testPeriod = 10;
 
 		while (window.isOpen())
 		{
 			deltaTime = deltaClock.restart();
-			sf::Event event;
 			while (window.pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
@@ -55,6 +59,15 @@ int main(int argc, char * argv[])
 			window.clear();
 			window.draw(sprite);
 			window.display();
+
+			frames++;
+			time += deltaTime.asSeconds();
+
+			if (time >= testPeriod) {
+				std::cout << frames / time << " average fps over last " << testPeriod << " seconds\n";
+				time = 0;
+				frames = 0;
+			}
 		}
 	}
 	else {
