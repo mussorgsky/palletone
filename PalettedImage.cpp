@@ -139,14 +139,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 
 	//zczytaj piksele
 	idx = 0;
-	if (compression == 0) {
-		//czytaj kazdy bajt po kolei do pixels
-		for (; idx < ch->lenChunk; idx++) {
-			pixels.push_back(ch->content[idx]);
-		}
-		std::cout << pixels.size() << " uncompressed pixels have been created\n";
-	}
-	else {
+	if (compression) {
 		std::cout << ch->lenChunk << " compressed pixels found\n";
 		std::vector<int> compressed;
 		std::vector<int> decompressed;
@@ -178,6 +171,12 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 		
 		//kopiuj decompressed w pixels
 		pixels = decompressed;
+	} else {
+		//czytaj kazdy bajt po kolei do pixels
+		for (; idx < ch->lenChunk; idx++) {
+			pixels.push_back(ch->content[idx]);
+		}
+		std::cout << pixels.size() << " uncompressed pixels have been created\n";
 	}
 }
 
