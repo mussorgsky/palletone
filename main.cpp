@@ -35,6 +35,8 @@ int main(int argc, char * argv[])
 		sf::Texture texture = image.makeTexture();
 		sprite.setTexture(texture);
 
+		sf::Uint8* texturePixels = new sf::Uint8[image.width * image.height * 4]; // 4 components (RGBA)
+
 		sf::Clock deltaClock;
 		sf::Time deltaTime;
 		sf::Event event;
@@ -53,8 +55,8 @@ int main(int argc, char * argv[])
 			}
 
 			image.cycleRanges(deltaTime.asSeconds());
-			texture = image.makeTexture();
-			sprite.setTexture(texture);
+			image.makeTexture(texturePixels);
+			texture.update(texturePixels);
 
 			window.clear();
 			window.draw(sprite);
@@ -64,11 +66,13 @@ int main(int argc, char * argv[])
 			time += deltaTime.asSeconds();
 
 			if (time >= testPeriod) {
-				std::cout << frames / time << " average fps over last " << testPeriod << " seconds\n";
+				std::cout << time / frames * 1000.0 << "ms average frame time over last " << testPeriod << " seconds\n";
 				time = 0;
 				frames = 0;
 			}
 		}
+
+		delete[] texturePixels;
 	}
 	else {
 		std::cout << "Could not open\n";

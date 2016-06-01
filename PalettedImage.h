@@ -22,5 +22,6 @@ public:
 	std::vector<int> pixels;
 	PalettedImage(std::vector<Chunk> chunks);
 	sf::Texture makeTexture();
+	void makeTexture(sf::Uint8*);
 	void cycleRanges(float);
 };

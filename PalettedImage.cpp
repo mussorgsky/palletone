@@ -186,6 +186,7 @@ sf::Texture PalettedImage::makeTexture()
 	texture.create(width, height);
 	sf::Uint8* texturePixels = new sf::Uint8[width * height * 4]; // 4 components (RGBA)
 
+	//to jest strasznie slaby sposob, trzeba cos z tym zrobic
 	for (int i = 0; i < pixels.size(); i++) {
 		texturePixels[4 * i] = colors[pixels[i]].red;
 		texturePixels[4 * i + 1] = colors[pixels[i]].green;
@@ -197,6 +198,16 @@ sf::Texture PalettedImage::makeTexture()
 
 	delete[] texturePixels;
 	return texture;
+}
+
+void PalettedImage::makeTexture(sf::Uint8 *texturePixels)
+{
+	for (int i = 0; i < pixels.size(); i++) {
+		texturePixels[4 * i] = colors[pixels[i]].red;
+		texturePixels[4 * i + 1] = colors[pixels[i]].green;
+		texturePixels[4 * i + 2] = colors[pixels[i]].blue;
+		texturePixels[4 * i + 3] = 255;
+	}
 }
 
 void PalettedImage::cycleRanges(float dT)
