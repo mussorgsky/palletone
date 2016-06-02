@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
 		unsigned char * data;
 		std::vector<Chunk> chunks;
 
-		int size = in.tellg();
+		int size = (int)in.tellg();
 		data = new unsigned char[size];
 
 		in.seekg(0, std::ios::beg);
