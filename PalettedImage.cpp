@@ -24,7 +24,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	//policz ile BMHD
 	int count = 0;
 	int chi;
-	for (int i = 0; i < chunks.size(); i++) {
+	for (unsigned int i = 0; i < chunks.size(); i++) {
 		if (chunks[i].chunkID == "BMHD") {
 			chi = i;
 			count++;
@@ -67,7 +67,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 
 	//policz ile CMAP
 	count = 0;
-	for (int i = 0; i < chunks.size(); i++) {
+	for (unsigned int i = 0; i < chunks.size(); i++) {
 		if (chunks[i].chunkID == "CMAP") {
 			chi = i;
 			count++;
@@ -90,7 +90,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	std::cout << colors.size() << " color palette has been created\n";
 
 	//zachowaj CRNGe
-	for (int chi = 0; chi < chunks.size(); chi++) {
+	for (unsigned int chi = 0; chi < chunks.size(); chi++) {
 		if (chunks[chi].chunkID == "CRNG") {
 			ch = &chunks[chi];
 			int rate = 0;
@@ -128,7 +128,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 
 	//policz ile BODY
 	count = 0;
-	for (int i = 0; i < chunks.size(); i++) {
+	for (unsigned int i = 0; i < chunks.size(); i++) {
 		if (chunks[i].chunkID == "BODY") {
 			chi = i;
 			count++;
@@ -187,7 +187,7 @@ sf::Texture PalettedImage::makeTexture()
 	sf::Uint8* texturePixels = new sf::Uint8[width * height * 4]; // 4 components (RGBA)
 
 	//to jest strasznie slaby sposob, trzeba cos z tym zrobic
-	for (int i = 0; i < pixels.size(); i++) {
+	for (unsigned int i = 0; i < pixels.size(); i++) {
 		texturePixels[4 * i] = colors[pixels[i]].red;
 		texturePixels[4 * i + 1] = colors[pixels[i]].green;
 		texturePixels[4 * i + 2] = colors[pixels[i]].blue;
@@ -202,7 +202,7 @@ sf::Texture PalettedImage::makeTexture()
 
 void PalettedImage::makeTexture(sf::Uint8 *texturePixels)
 {
-	for (int i = 0; i < pixels.size(); i++) {
+	for (unsigned int i = 0; i < pixels.size(); i++) {
 		texturePixels[4 * i] = colors[pixels[i]].red;
 		texturePixels[4 * i + 1] = colors[pixels[i]].green;
 		texturePixels[4 * i + 2] = colors[pixels[i]].blue;
@@ -213,7 +213,7 @@ void PalettedImage::makeTexture(sf::Uint8 *texturePixels)
 void PalettedImage::cycleRanges(float dT)
 {
 	Range * r;
-	for (int i = 0; i < ranges.size(); i++) {
+	for (unsigned int i = 0; i < ranges.size(); i++) {
 		r = &ranges[i];
 		//sprawdz czy cyklowac
 		if (r->flags % 2 == 1) {
