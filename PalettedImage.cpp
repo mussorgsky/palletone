@@ -23,7 +23,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 
 	//policz ile BMHD
 	int count = 0;
-	int chi;
+	int chi = 0;
 	for (unsigned int i = 0; i < chunks.size(); i++) {
 		if (chunks[i].chunkID == "BMHD") {
 			chi = i;
