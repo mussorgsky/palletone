@@ -29,7 +29,19 @@ int main(int argc, char * argv[])
 		PalettedImage image = PalettedImage(chunks);
 		chunks.clear();
 
-		sf::RenderWindow window(sf::VideoMode(image.width, image.height), "Palletone");
+		int i = 0;
+		size_t idx = 0;
+		while (argv[1][i + 1] != 0) {
+			if (argv[1][i] == '\\' || argv[1][i] == '/') {
+				idx = i + 1;
+			}
+			i++;
+		}
+		
+		sf::String s = argv[1];
+		s = s.substring(idx, sf::String::InvalidPos);
+		
+		sf::RenderWindow window(sf::VideoMode(image.width, image.height), s + " - Palletone ");
 		window.setFramerateLimit(60);
 
 		sf::Sprite sprite;
