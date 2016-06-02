@@ -27,6 +27,7 @@ int main(int argc, char * argv[])
 		delete[] data;
 
 		PalettedImage image = PalettedImage(chunks);
+		chunks.clear();
 
 		sf::RenderWindow window(sf::VideoMode(image.width, image.height), "Palletone");
 		window.setFramerateLimit(60);
