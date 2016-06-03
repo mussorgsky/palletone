@@ -56,7 +56,7 @@ int main(int argc, char * argv[])
 
 		int frames = 0;
 		float time = 0;
-		const int testPeriod = 10;
+		const int testPeriod = 5;
 
 		while (window.isOpen())
 		{
@@ -78,8 +78,8 @@ int main(int argc, char * argv[])
 			frames++;
 			time += deltaTime.asSeconds();
 
-			if (time >= testPeriod) {
-				std::cout << time / frames * 1000.0 << "ms average frame time over last " << testPeriod << " seconds\n";
+			if (time > testPeriod) {
+				std::cout << time / frames * 1000.0 << "ms " << frames / time << "fps over last " << testPeriod << "s\n";
 				time = 0;
 				frames = 0;
 			}
