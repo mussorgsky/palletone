@@ -61,7 +61,6 @@ std::vector<Chunk> Chunk::makeChunks(unsigned char * data)
 		for (; idx < offset + 4; idx++) {
 			chunkID[idx - offset] = data[idx];
 		}
-		std::cout << "Chunk ID: " << chunkID << "\n";
 		
 		offset = idx;
 		//czytaj 4 bajty -> lenChunk
@@ -69,7 +68,6 @@ std::vector<Chunk> Chunk::makeChunks(unsigned char * data)
 			lenChunk += data[idx] * mult;
 			mult /= 256;
 		}
-		std::cout << "LenChunk: " << lenChunk << "\n";
 
 		offset = idx;
 		//czytaj n bajtow, zapamietaj
@@ -79,6 +77,9 @@ std::vector<Chunk> Chunk::makeChunks(unsigned char * data)
 
 		//dodaj padding jesli lenChunk nieparzyste
 		if (lenChunk % 2) { idx++; }
+
+		//wypisz co sie dzieje w ogole
+		std::cout << chunkID << " " << lenChunk << "\n";
 
 		//zrob nowy chunk z tego syfu
 		chunks.push_back(Chunk(chunkID, lenChunk, content));

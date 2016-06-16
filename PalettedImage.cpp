@@ -41,7 +41,6 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 		width += ch->content[idx] * mult;
 		mult /= 256;
 	}
-	std::cout << width << " <--- width\n";
 
 	offset = idx;
 	//height
@@ -49,21 +48,25 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 		height += ch->content[idx] * mult;
 		mult /= 256;
 	}
-	std::cout << height << " <--- height\n";
 
 	//pomin 4 bajty
 	idx += 4;
 
 	//numPlanes
 	numPlanes = ch->content[idx++];
-	std::cout << numPlanes << " <--- numPlanes\n";
 
 	//pomin 1 bajt
 	idx += 1;
 
 	//compression
 	compression = ch->content[idx++];
-	std::cout << compression << " <--- compression\n";
+
+	//napisz co tam
+	std::cout << width << "x" << height << " " << numPlanes << " PLANES ";
+	if (compression) {
+		std::cout << "COMPRESSED";
+	}
+	std::cout << "\n";
 
 	//policz ile CMAP
 	count = 0;
