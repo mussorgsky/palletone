@@ -1,6 +1,6 @@
 #include <vector>
 #include "Chunk.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 struct Color {
 	int red, green, blue;

@@ -14,5 +14,5 @@ public:
 	Chunk(std::string id, int length, std::vector<unsigned char> data);
 	void printInfo();
 
-	static std::vector<Chunk> Chunk::makeChunks(unsigned char * data);
+	static std::vector<Chunk> makeChunks(unsigned char * data);
 };

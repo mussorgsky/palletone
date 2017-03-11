@@ -1,4 +1,5 @@
 #include "PalettedImage.h"
+#include <cmath>
 
 Color::Color(int r, int g, int b)
 {
@@ -80,7 +81,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	ch = &chunks[chi];
 
 	//sprawdz czy CMAP->lenChunk / 3 = 2 ^ numPlanes
-	(ch->lenChunk / 3 != std::pow(2, numPlanes)) ? std::cout << "Something wrong with numPlanes\n" : std::cout << "NUMPLANES GOOD\n";
+	(ch->lenChunk / 3 != pow(2, numPlanes)) ? std::cout << "Something wrong with numPlanes\n" : std::cout << "NUMPLANES GOOD\n";
 
 	//stworz palete
 	int r, g, b;
