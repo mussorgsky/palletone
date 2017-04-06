@@ -21,6 +21,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	int numPlanes, compression;
 	width = 0;
 	height = 0;
+	shortestRate = 1;
 
 	//policz ile BMHD
 	int count = 0;
@@ -126,6 +127,10 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 
 			//pushuj range
 			ranges.push_back(Range(rate, flags, low, high));
+
+			if(rate * (15.0 / 4096.0) > shortestRate) {
+				shortestRate = rate * (15.0 / 4096.0);
+			}
 		}
 	}
 	std::cout << ranges.size() << " color ranges have been created\n";

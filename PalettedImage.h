@@ -17,6 +17,7 @@ struct Range {
 class PalettedImage {
 public:
 	unsigned int width, height;
+	int shortestRate;
 	std::vector<Color> colors;
 	std::vector<Range> ranges;
 	std::vector<int> pixels;
