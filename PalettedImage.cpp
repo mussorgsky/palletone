@@ -21,7 +21,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	int numPlanes, compression;
 	width = 0;
 	height = 0;
-	shortestRate = 1;
+	quickestRate = 1;
 
 	//policz ile BMHD
 	int count = 0;
@@ -98,7 +98,7 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 	for (unsigned int chi = 0; chi < chunks.size(); chi++) {
 		if (chunks[chi].chunkID == "CRNG") {
 			ch = &chunks[chi];
-			int rate = 0;
+			int rate = 1;
 			int flags = 0;
 			int low, high;
 			
@@ -111,6 +111,9 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 				rate += ch->content[idx] * mult;
 				mult /= 256;
 			}
+			std::cout << rate<< ": ";
+			rate *= (15.0 / 4096.0);
+			std::cout << rate << "\n";
 
 			//flags
 			offset = idx;
@@ -128,8 +131,8 @@ PalettedImage::PalettedImage(std::vector<Chunk> chunks)
 			//pushuj range
 			ranges.push_back(Range(rate, flags, low, high));
 
-			if(rate * (15.0 / 4096.0) > shortestRate) {
-				shortestRate = rate * (15.0 / 4096.0);
+			if(rate > quickestRate) {
+				quickestRate = rate;
 			}
 		}
 	}
@@ -229,7 +232,7 @@ void PalettedImage::cycleRanges(float dT)
 			//sprawdz czy cyklowac do tylu
 			if (r->flags >> 1 == 1) {
 				r->time += dT;
-				if (r->time > 1 / (r->rate * (15.0 / 4096.0))) {
+				if (r->time > 1.0f / (float)r->rate) {
 					Color color = colors[ranges[i].low];
 					colors.erase(colors.begin() + r->low);
 					colors.insert(colors.begin() + r->high, color);
@@ -239,7 +242,7 @@ void PalettedImage::cycleRanges(float dT)
 			}
 			else {
 				r->time += dT;
-				if (r->time > 1 / (r->rate * (15.0 / 4096.0))) {
+				if (r->time > 1.0f / (float)r->rate) {
 					Color color = colors[ranges[i].high];
 					colors.erase(colors.begin() + r->high);
 					colors.insert(colors.begin() + r->low, color);

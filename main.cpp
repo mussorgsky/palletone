@@ -42,8 +42,8 @@ int main(int argc, char * argv[])
 		s = s.substring(idx, sf::String::InvalidPos);
 		
 		sf::RenderWindow window(sf::VideoMode(image.width, image.height), s + " - Palletone ");
-		window.setFramerateLimit(image.shortestRate);
-		std::cout << "Frame limit: " << image.shortestRate << std::endl;
+		window.setFramerateLimit(image.quickestRate);
+		std::cout << "Frame limit: " << image.quickestRate << std::endl;
 
 		sf::Sprite sprite;
 		sf::Texture texture = image.makeTexture();
