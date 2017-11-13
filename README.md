@@ -1,6 +1,6 @@
 # palletone
 LBM image viewer
 
-Takes filename as an argument. Displays PBM encoded images in LBM format.
+Takes filename as an argument. Displays images which are PBM encoded in the LBM file format.
 
-*ILBM is not supported and there is x->0 error handling*
+You can find some nice pictures here http://www.randelshofer.ch/animations/anims_ibm/mark_j_ferrari/thu_mark_j_ferrari.html
