@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 		s = s.substring(idx, sf::String::InvalidPos);
 
 		sf::RenderWindow window(sf::VideoMode(image.width, image.height), s + " - Palletone ");
-		// window.setFramerateLimit(image.quickestRate);
+		window.setFramerateLimit(image.quickestRate);
 		std::cout << "Frame limit: " << image.quickestRate << std::endl;
 
 		sf::Texture cIndexes = image.colorIndexTexture();
@@ -87,9 +87,9 @@ int main(int argc, char *argv[])
 					window.close();
 			}
 
-			// image.cycleRanges(deltaTime.asSeconds());
-			// palette = image.paletteTexture();
-			// shader.setUniform("palette", palette);
+			image.cycleRanges(deltaTime.asSeconds());
+			palette = image.paletteTexture();
+			shader.setUniform("palette", palette);
 			// image.makeTexture(texturePixels);
 			// texture.update(texturePixels);
 
