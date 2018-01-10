@@ -100,7 +100,7 @@ void main() {
 		sf::Event event;
 
 		int frames = 0;
-		float time = 0;
+		float time = 0.0f;
 		const int testPeriod = 5;
 
 		while (window.isOpen())
@@ -109,7 +109,13 @@ void main() {
 			while (window.pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
+				{
 					window.close();
+				}
+				if (event.type == sf::Event::Resized)
+				{
+					shader.setUniform("Resolution", (sf::Vector2f)window.getSize());
+				}
 			}
 
 			image.cycleRanges(deltaTime.asSeconds());
@@ -128,8 +134,8 @@ void main() {
 
 			if (time > testPeriod)
 			{
-				std::cout << time / frames * 1000.0 << "ms " << frames / time << "fps over last " << testPeriod << "s\n";
-				time = 0;
+				std::cout << time / frames * 1000.0f << "ms " << frames / time << "fps over last " << testPeriod << "s\n";
+				time = 0.0f;
 				frames = 0;
 			}
 		}
