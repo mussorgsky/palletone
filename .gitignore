@@ -282,3 +282,7 @@ $RECYCLE.BIN/
 palletone.sln
 palletone.vcxproj.filters
 palletone.vcxproj
+
+# Visual Studio Code
+# =========================
+.vscode/
